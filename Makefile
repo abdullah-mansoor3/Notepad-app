@@ -7,7 +7,7 @@ SRC_DIR = source
 HEADER_DIR = headers
 
 # Output executable
-TARGET = notepad_app
+TARGET = notepad
 
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp) main.cpp

@@ -1,16 +1,17 @@
 #ifndef AVL_H
 #define AVL_H
 
+#include<string>
+
+
 struct AVLNode{
 
-    string word;
-    AVLNode *leftChild;
-    AVLNode *rightChild;
+    std::string word;
+    AVLNode *left;
+    AVLNode *right;
     int height;
 
-    AVLNode();
-
-    int height();
+    AVLNode(std::string Word);
 
 };
 
@@ -24,17 +25,23 @@ class AVL{
 
     ~AVL();
 
-    void deleteTree(AVLNode *Node);
+    void deleteTree(AVLNode *node);
 
-    void insertNode(string word);
-    
-    void rightRotate(AVLNode *Node);
+    AVLNode* insertNode(std::string word, AVLNode *node);
 
-    void leftRotate(AVLNode *Node);
+    void insertNode(std::string word);
     
-    void rightLeftRotate(AVLNode *Node); //first right then left
+    AVLNode* rightRotate(AVLNode *node);
+
+    AVLNode* leftRotate(AVLNode *node);
     
-    void leftRightRotate(AVLNode *Node); //first left then right
+    AVLNode* rightLeftRotate(AVLNode *node); //first right then left
+    
+    AVLNode* leftRightRotate(AVLNode *node); //first left then right
+
+    int height(AVLNode *node);
+
+    int balanceFactor(AVLNode *node);
 
 
 };
