@@ -26,6 +26,10 @@ void AVL::deleteTree(AVLNode* node){
     }
 }
 
+void AVL::deleteTree(){
+    deleteTree(root);
+}
+
 AVLNode* AVL::insertNode(std::string word, AVLNode *node){
     if(!node){
 
@@ -85,7 +89,7 @@ int AVL::balanceFactor(AVLNode *node){
 }
 
 AVLNode* AVL::leftRotate(AVLNode *node){
-    if(!node)
+    if(!node || !node->left)
         return node;
 
     AVLNode *newRoot = node->right;
@@ -99,7 +103,7 @@ AVLNode* AVL::leftRotate(AVLNode *node){
 }
 
 AVLNode* AVL::rightRotate(AVLNode *node){
-    if(!node)
+    if(!node || !node->right)
         return node;
 
     AVLNode *newRoot = node->left;

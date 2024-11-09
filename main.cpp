@@ -1,28 +1,41 @@
-#include "headers/AVL.h"
-#include "headers/Stack.h"
-#include "headers/List.h"
+#include "headers/Backend.h"
+
 #include<iostream>
+
 
 using namespace std;
 
 int main(){
 
-    List l;
+    Backend notepad;
 
-    l.insertString("Hello my name is Abdullah");
+    notepad.insertLetter('h');
+    notepad.insertLetter('e');
 
-    cout<<l.lastWord();
+    notepad.display();
 
-    l.deleteLast();
-    l.deleteLast();
-    l.deleteLast();
-    l.deleteLast();
-    l.deleteLast();
-    l.deleteLast();
-    l.deleteLast();
-    l.deleteLast();
+    notepad.insertLetter('l');
+    notepad.insertLetter('l');
+    notepad.insertLetter('o');
+    notepad.insertLetter(' ');
 
-    cout<<endl<<l.getInStringForm();
+    notepad.display();
+
+    notepad.insertLetter('w');
+    notepad.insertLetter('o');
+    notepad.insertLetter('r');
+    notepad.insertLetter('l');
+    notepad.insertLetter('d');
+
+    notepad.display();
+
+    notepad.deleteLastLetter();
+    notepad.deleteLastLetter();
+    notepad.deleteLastLetter();
+
+    notepad.display();
+
+    notepad.saveToFile();
 
     return 0;
 }

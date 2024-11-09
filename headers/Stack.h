@@ -29,6 +29,8 @@ class Stack{
     void deleteStack();
 
     void insertWord(std::string word);
+
+    void display();
 };
 
 #endif

@@ -1,5 +1,7 @@
 #include "../headers/List.h"
 
+#include<iostream>
+
 using namespace std;
 
 ListNode::ListNode(char c) :
@@ -111,4 +113,14 @@ void List::deleteList(){
     while(!isEmpty()){
         deleteLast();
     }
+}
+
+void List::display(){
+    ListNode *curr = head;
+    cout<<"\n";
+    while(curr){
+        cout<<curr->letter;
+        curr = curr->next;
+    }
+    cout<<endl;
 }

@@ -27,6 +27,8 @@ class AVL{
 
     void deleteTree(AVLNode *node);
 
+    void deleteTree();
+
     AVLNode* insertNode(std::string word, AVLNode *node);
 
     void insertNode(std::string word);

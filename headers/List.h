@@ -38,6 +38,8 @@ class List{
 
     void deleteList();
 
+    void display();
+
 };
 
 #endif

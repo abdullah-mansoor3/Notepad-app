@@ -59,3 +59,13 @@ void Stack::insertWord(std::string word){
         insert(c);
     }
 }
+
+void Stack::display(){
+    StackNode *curr = head;
+    cout<<"\n";
+    while(curr){
+        cout<<curr->letter;
+        curr = curr->next;
+    }
+    cout<<endl;
+}
