@@ -3,9 +3,16 @@
 // #include <string>
 #include <cmath>
 
-AVLNode::AVLNode(std::string Word) : word(Word), left(nullptr), right(nullptr), height(0) {}
+AVLNode::AVLNode(std::string Word) :
+    word(Word),
+    left(nullptr),
+    right(nullptr),
+    height(0)
+    {}
 
-AVL::AVL() :root(nullptr)   {}
+AVL::AVL() :
+    root(nullptr)
+    {}
 
 AVL::~AVL(){
     deleteTree(root);
