@@ -1,0 +1,18 @@
+#executables
+notepad_app
+*.out
+
+#all object files
+*.o
+
+#test file
+test.cpp
+
+#notes
+progress.txt
+
+#program requirements pdf
+DSA_A4.pdf
+
+#vscode settings
+.vscode/
