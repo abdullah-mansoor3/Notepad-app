@@ -7,7 +7,7 @@ AVLNode::AVLNode(std::string Word) :
     word(Word),
     left(nullptr),
     right(nullptr),
-    height(0)
+    height(1)
     {}
 
 AVL::AVL() :

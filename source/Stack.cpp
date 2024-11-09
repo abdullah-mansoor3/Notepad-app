@@ -53,9 +53,6 @@ void Stack::deleteStack(){
 }
 
 void Stack::insertWord(std::string word){
-    if(word.length() == 0)
-        return;
-
     deleteStack();
 
     for(char c:word){
