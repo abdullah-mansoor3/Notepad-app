@@ -1,6 +1,7 @@
+#include "../headers/globalVars.h"
 #include "../headers/AVL.h"
 #include <iostream>
-#include <cmath>
+#include <string>
 
 using namespace std;
 
@@ -76,6 +77,26 @@ void AVL::insertNode(string word){
     root = insertNode(word, root);
 }
 
+
+bool AVL::search(string word){
+
+    AVLNode *curr = root;
+
+    while(curr){
+
+        string currWord = curr->word;
+
+        if(currWord == word)
+            return true;
+        else if(word > currWord)
+            curr = curr->right;
+        else
+            curr = curr->left;
+    }
+
+    return false; //not found
+}
+
 int AVL::height(AVLNode *node){
     if(node)
         return node->height;
@@ -135,4 +156,95 @@ AVLNode* AVL::rightLeftRotate(AVLNode *node){
     node -> right = rightRotate(node->right);
     
     return leftRotate(node);
+}
+
+string* AVL::getSuggestions(string word){
+
+    string *suggestions = new string[NUM_OF_SUGGESTED_WORDS];
+
+    if(word == "") //if we got an empty word
+        for(int i = 0;i<NUM_OF_SUGGESTED_WORDS;i++)
+            suggestions[i] = "0";
+    else{
+        suggestions[0] = searchByInsertion(word);
+        suggestions[1] = searchBySubstitution(word);
+        suggestions[2] = searchByOmission(word);
+        suggestions[3] = searchByReversal(word);
+    }
+
+    return suggestions;
+}
+
+string AVL::searchByInsertion(string word){
+
+    string correctedWord = word;
+
+    for(char c = 'a'; c <= 'z'; c++){
+        for(int i = 0; i < word.length(); i++){
+            correctedWord.insert(i, 1, c); // (position, num of chars, chars)
+
+            if(search(correctedWord)){ //if the word is in the dictionary
+                return correctedWord;
+            }
+
+            correctedWord = word; //revert to original word
+        }
+    }
+
+    return "0"; //no suggestion found
+}
+
+string AVL::searchBySubstitution(string word){
+
+    string correctedWord = word;
+
+    for(char c = 'a'; c <= 'z'; c++){
+        for(int i = 0; i < word.length(); i++){
+            correctedWord[i] = c; //replace
+
+            if(search(correctedWord)){ //if the word is in the dictionary
+                return correctedWord;
+            }
+
+            correctedWord = word; //revert to original word
+        }
+    }
+
+    return "0"; //no suggestion found
+
+}
+
+string AVL::searchByOmission(string word){
+
+    string correctedWord = word;
+
+    for(int i = 0; i < word.length(); i++){
+        correctedWord.erase(i, 1); //remove the char at i
+
+        if(search(correctedWord)){ //if the word is in the dictionary
+            return correctedWord;
+        }
+
+        correctedWord = word; //revert to original word
+    }
+
+    return "0"; //no suggestion found
+
+}
+
+string AVL::searchByReversal(string word){
+
+    string correctedWord = word;
+
+    for (int i = 0; i < word.length() - 1; i++){
+        
+        swap(correctedWord[i], correctedWord[i + 1]);  //swap adjacent characters
+        if (search(correctedWord)) {
+            return correctedWord;
+        }
+        correctedWord = word; //revert to original word 
+    }
+
+    return "0"; //no suggestion found
+
 }

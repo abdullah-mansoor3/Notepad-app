@@ -3,6 +3,8 @@
 
 #include<string>
 
+using namespace std;
+
 
 struct AVLNode{
 
@@ -32,6 +34,8 @@ class AVL{
     AVLNode* insertNode(std::string word, AVLNode *node);
 
     void insertNode(std::string word);
+
+    bool search(string word);
     
     AVLNode* rightRotate(AVLNode *node);
 
@@ -45,6 +49,16 @@ class AVL{
 
     int balanceFactor(AVLNode *node);
 
+    string *getSuggestions(string word); //returns at max NUM_OF_SUGGESTED_WORDS suggestions for the word
+
+    //these funcs will return "0" if no suggestion was found
+    string searchBySubstitution(string word);
+
+    string searchByOmission(string word);
+
+    string searchByInsertion(string word);
+
+    string searchByReversal(string word);
 
 };
 

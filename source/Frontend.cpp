@@ -1,5 +1,6 @@
 #include "../headers/Frontend.h"
 #include "../headers/Backend.h"
+#include "../headers/globalVars.h"
 #include<ncurses.h>
 #include<iostream>
 #include<string>
@@ -61,13 +62,14 @@ void Frontend::display(){
     //clean up the window
     delwin(textwin);
 
-    // string *suggestions = backend.getSuggestions();
+    string *suggestions = backend->getSuggestions();
 
     // //display word suggestions at the bottom of the screen
     // int start_y = rows - 2;  //suggestions line position
     // int start_x = 2;         
-    // for (int i = 0; i < 5; i++) {
-    //     mvprintw(start_y, start_x + (i * 15), "[%s]", suggestions[i].c_str());
+    // for (int i = 0; i < NUM_OF_SUGGESTED_WORDS; i++) {
+    //     if(suggestions[i] != "0" && suggestions[i]!="") //only print valid suggestions
+    //         mvprintw(start_y, start_x + (i * 15), "[%s]", suggestions[i].c_str());
     // }
     
     refresh();
@@ -98,9 +100,9 @@ bool Frontend::takeInput(){ //returns true if user wants to exit
     else if(ch >= 32 && ch <= 126){ //printable keys
         backend->insertLetter(ch);    
     }
-    else if(ch == KEY_ENTER){
+    else if(ch == KEY_ENTER || ch == '\n'){
         //add \n when enter is pressed
-        backend->insertLetter('\n');
+        backend->insertLetter(10);
     }
 
     return false;

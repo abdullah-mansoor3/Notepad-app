@@ -29,5 +29,4 @@ $(TARGET): $(OBJ_FILES)
 
 # Clean up object files and the executable
 clean:
-	rm -f $(OBJ_FILES) $(TARGET)
-	rm -f notepad.txt
+	rm -f $(OBJ_FILES) $(TARGET) notepad_app notepad.txt

@@ -89,7 +89,8 @@ string List::getInStringForm(){
     ListNode *curr = head;
 
     while(curr){
-        text = text + curr->letter;
+        if(curr->letter != ' ' && curr->letter != '\n')//dont include space and new line character in the word
+            text = text + curr->letter;
         curr = curr->next;
     }
 
@@ -101,7 +102,10 @@ void List::insertString(string text){
     deleteList(); //delete the existing text and then load the new text
 
     for(char c : text){
-        insertAtEnd(c);
+        if(c=='\n')
+            insertAtEnd(10);
+        else
+            insertAtEnd(c);
     }
 }
 

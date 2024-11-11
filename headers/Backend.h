@@ -6,19 +6,20 @@
 
 #include<string>
 
-using namespace std;
-
-
 //data structures
 #include "AVL.h"
 #include "List.h"
 #include "Stack.h"
+#include "globalVars.h"
+
+using namespace std;
 
 class Backend{
 
     AVL dictionary;
     List text;
     Stack currentWord;
+    string *currentSuggestions;
 
     public:
 
@@ -34,7 +35,7 @@ class Backend{
 
     void exitNotepad();
 
-    std::string *getSuggestions(); //returns a dynamic array of 5 strings
+    string *getSuggestions(); //returns a dynamic array of NUM_OF_SUGGESTED_WORDS strings
 
     void insertLetter(char letter);
 

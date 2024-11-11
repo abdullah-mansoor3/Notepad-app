@@ -5,7 +5,9 @@
 
 using namespace std;
 
-Backend::Backend(){
+Backend::Backend():
+    currentSuggestions(nullptr)
+{
     initDictionary();
 }
 
@@ -51,6 +53,8 @@ void Backend::exitNotepad(){
     dictionary.deleteTree();
     text.deleteList();
     currentWord.deleteStack();
+    if(currentSuggestions)
+        delete currentSuggestions;
 }
 
 void Backend::insertLetter(char letter){
@@ -105,4 +109,14 @@ void Backend::loadFromFile(){
     text.insertString(fileText);
 
     currentWord.insertWord(text.lastWord()); //update the current word
+}
+
+string* Backend::getSuggestions(){
+    if(currentSuggestions)
+        delete currentSuggestions; //delete the previous suggestions array
+    
+    // get suggestions for the current word
+    currentSuggestions = dictionary.getSuggestions(text.lastWord());
+
+    return currentSuggestions;
 }

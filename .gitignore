@@ -1,5 +1,6 @@
 #executables
 notepad
+notepad_app
 *.out
 
 #all object files
