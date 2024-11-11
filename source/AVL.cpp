@@ -10,16 +10,17 @@ AVLNode::AVLNode(std::string Word) :
     height(1)
     {}
 
+
 AVL::AVL() :
     root(nullptr)
     {}
 
 AVL::~AVL(){
-    deleteTree(root);
+    deleteTree();
 }
 
 void AVL::deleteTree(AVLNode* node){
-    if (node) {
+    if (node){
         deleteTree(node->left);  // Recursively delete left subtree
         deleteTree(node->right);  // Recursively delete right subtree
         delete node;              // Delete the current node
@@ -28,6 +29,7 @@ void AVL::deleteTree(AVLNode* node){
 
 void AVL::deleteTree(){
     deleteTree(root);
+    root = nullptr;
 }
 
 AVLNode* AVL::insertNode(std::string word, AVLNode *node){

@@ -29,12 +29,6 @@ int main(){
 
     notepad.display();
 
-    notepad.deleteLastLetter();
-    notepad.deleteLastLetter();
-    notepad.deleteLastLetter();
-
-    notepad.display();
-
     notepad.saveToFile();
 
     return 0;

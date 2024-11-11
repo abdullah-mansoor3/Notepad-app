@@ -6,7 +6,7 @@
 using namespace std;
 
 Backend::Backend(){
-    // initDictionary();
+    initDictionary();
 }
 
 Backend::~Backend(){
