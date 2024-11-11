@@ -58,6 +58,7 @@ void Backend::insertLetter(char letter){
     text.insertAtEnd(letter);
 
     //get the last letter from the text and insert it in the stack
+    //thsi will automatically handle spaces
     currentWord.insertWord(text.lastWord());
 }
 
@@ -70,10 +71,38 @@ void Backend::deleteLastLetter(){
 
 }
 
+string Backend::getText(){
+    return text.getInStringForm();
+}
+
 void Backend::display(){
     cout<<"\n\nCurr word:";
     currentWord.display();
 
     cout<<"\nText:\n";
     text.display();
+}
+
+void Backend::loadFromFile(){
+
+    currentWord.deleteStack(); //delete the current word
+
+    ifstream file("notepad.txt");
+
+    if(!file) //do nothing if file doesnt exist
+        return;
+
+    string fileText = "";
+
+    string line;
+
+    while(getline(file, line)){
+        fileText += line;
+    }
+
+    file.close();
+
+    text.insertString(fileText);
+
+    currentWord.insertWord(text.lastWord()); //update the current word
 }

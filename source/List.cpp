@@ -98,7 +98,7 @@ string List::getInStringForm(){
 }
 
 void List::insertString(string text){
-    deleteList();
+    deleteList(); //delete the existing text and then load the new text
 
     for(char c : text){
         insertAtEnd(c);

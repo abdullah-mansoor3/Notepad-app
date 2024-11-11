@@ -1,7 +1,8 @@
 #include "../headers/AVL.h"
 #include <iostream>
-// #include <string>
 #include <cmath>
+
+using namespace std;
 
 AVLNode::AVLNode(std::string Word) :
     word(Word),
@@ -32,7 +33,7 @@ void AVL::deleteTree(){
     root = nullptr;
 }
 
-AVLNode* AVL::insertNode(std::string word, AVLNode *node){
+AVLNode* AVL::insertNode(string word, AVLNode *node){
     if(!node){
 
         //create and return a one node tree
@@ -71,7 +72,7 @@ AVLNode* AVL::insertNode(std::string word, AVLNode *node){
     return node;
 }
 
-void AVL::insertNode(std::string word){
+void AVL::insertNode(string word){
     root = insertNode(word, root);
 }
 

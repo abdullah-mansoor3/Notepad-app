@@ -1,4 +1,4 @@
-#include "headers/Backend.h"
+#include "headers/Frontend.h"
 
 #include<iostream>
 
@@ -7,29 +7,19 @@ using namespace std;
 
 int main(){
 
-    Backend notepad;
+    Backend *backend = new Backend;
 
-    notepad.insertLetter('h');
-    notepad.insertLetter('e');
+    Frontend frontend(backend);
 
-    notepad.display();
+    frontend.initScreen();
+    frontend.display();
 
-    notepad.insertLetter('l');
-    notepad.insertLetter('l');
-    notepad.insertLetter('o');
-    notepad.insertLetter(' ');
+    bool exit = false;
 
-    notepad.display();
-
-    notepad.insertLetter('w');
-    notepad.insertLetter('o');
-    notepad.insertLetter('r');
-    notepad.insertLetter('l');
-    notepad.insertLetter('d');
-
-    notepad.display();
-
-    notepad.saveToFile();
+    while(!exit){
+        frontend.display();
+        exit = frontend.takeInput();
+    }
 
     return 0;
 }

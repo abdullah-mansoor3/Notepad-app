@@ -6,6 +6,8 @@
 
 #include<string>
 
+using namespace std;
+
 
 //data structures
 #include "AVL.h"
@@ -39,6 +41,8 @@ class Backend{
     void deleteLastLetter();
 
     void display();
+
+    string getText();
 };
 
 #endif
