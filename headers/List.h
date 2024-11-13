@@ -3,6 +3,8 @@
 
 #include<string>
 
+using namespace std;
+
 struct ListNode{
 
     char letter;
@@ -39,6 +41,8 @@ class List{
     void deleteList();
 
     void display();
+
+    void updateLastWord(string word);
 
 };
 

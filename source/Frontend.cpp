@@ -59,18 +59,23 @@ void Frontend::display(){
 
     wrefresh(textwin);
 
-    //clean up the window
-    delwin(textwin);
-
     string *suggestions = backend->getSuggestions();
 
-    // //display word suggestions at the bottom of the screen
-    // int start_y = rows - 2;  //suggestions line position
-    // int start_x = 2;         
-    // for (int i = 0; i < NUM_OF_SUGGESTED_WORDS; i++) {
-    //     if(suggestions[i] != "0" && suggestions[i]!="") //only print valid suggestions
-    //         mvprintw(start_y, start_x + (i * 15), "[%s]", suggestions[i].c_str());
-    // }
+    string w1 = suggestions[0];
+    string w2 = suggestions[1];
+    string w3 = suggestions[2];
+    string w4 = suggestions[3];
+
+    //display word suggestions at the bottom of the screen
+    int start_y = rows - 2;  //suggestions line position
+    int start_x = 2;         
+    for (int i = 0; i < NUM_OF_SUGGESTED_WORDS; i++) {
+        if(suggestions[i] != "0" && suggestions[i]!="") //only print valid suggestions
+            mvprintw(start_y, start_x + (i * 15), "[%s]", suggestions[i].c_str());
+    }
+
+    //clean up the window
+    delwin(textwin);
     
     refresh();
 }
@@ -97,7 +102,10 @@ bool Frontend::takeInput(){ //returns true if user wants to exit
     else if (ch == KEY_BACKSPACE || ch == 127) {  // Backspace (handle both common values)
         backend->deleteLastLetter();
     }
-    else if(ch >= 32 && ch <= 126){ //printable keys
+    else if(ch>='1' && ch<='4'){ //user selected a suggestion
+        backend->processSuggestion(ch - '0');
+    }
+    else if(ch >= 32 && ch <= 126 || ch==' '){ //printable keys
         backend->insertLetter(ch);    
     }
     else if(ch == KEY_ENTER || ch == '\n'){

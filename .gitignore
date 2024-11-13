@@ -18,5 +18,8 @@ DSA_A4.pdf
 #vscode settings
 .vscode/
 
+#debug settings
+build/
+
 #notepad file
 notepad.txt

@@ -49,7 +49,8 @@ char List::deleteLast(){
     else
         head = nullptr;
 
-    delete deleted;
+    if(deleted)
+        delete deleted;
     return letter;
 }
 
@@ -89,7 +90,7 @@ string List::getInStringForm(){
     ListNode *curr = head;
 
     while(curr){
-        if(curr->letter != ' ' && curr->letter != '\n')//dont include space and new line character in the word
+        if(curr->letter != '\n')//dont include space and new line character in the word
             text = text + curr->letter;
         curr = curr->next;
     }
@@ -127,4 +128,19 @@ void List::display(){
         curr = curr->next;
     }
     cout<<endl;
+}
+
+void List::updateLastWord(string word){
+    ListNode *curr = tail;
+    if(!tail){
+        return;
+    }
+
+    //delete the last worod
+    while(curr && curr->letter != ' '){
+        curr = curr->previous;
+        deleteLast();
+    }
+
+    insertString(word); //insert the new updated word
 }

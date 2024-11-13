@@ -44,6 +44,8 @@ class Backend{
     void display();
 
     string getText();
+
+    void processSuggestion(int suggestionNumber);
 };
 
 #endif

@@ -7,9 +7,9 @@ using namespace std;
 
 Backend::Backend():
     currentSuggestions(nullptr)
-{
-    initDictionary();
-}
+    {
+        initDictionary();
+    }
 
 Backend::~Backend(){
     exitNotepad();
@@ -27,8 +27,23 @@ void Backend::initDictionary(){
 
     while(getline(file, line)){
 
-        if(!line.empty())
+        if(!line.empty()){
+            //first remove escape chaarcters
+            int start = 0;
+            int end = line.length() - 1;
+
+            while(start < line.length() && (line[start] == '\t' || line[start] == '\n' || line[start] == '\r')){
+                ++start;
+            }
+
+            while (end > start && (line[end] == '\t' || line[end] == '\n' || line[end] == '\r')) {
+                --end;
+            }
+
+            line = line.substr(start, end - start + 1);
+
             dictionary.insertNode(line);
+        }
     }
 
     file.close();
@@ -53,8 +68,6 @@ void Backend::exitNotepad(){
     dictionary.deleteTree();
     text.deleteList();
     currentWord.deleteStack();
-    if(currentSuggestions)
-        delete currentSuggestions;
 }
 
 void Backend::insertLetter(char letter){
@@ -112,11 +125,29 @@ void Backend::loadFromFile(){
 }
 
 string* Backend::getSuggestions(){
-    if(currentSuggestions)
-        delete currentSuggestions; //delete the previous suggestions array
+    if(currentSuggestions != nullptr)
+        delete[] currentSuggestions; //delete the previous suggestions array
     
     // get suggestions for the current word
-    currentSuggestions = dictionary.getSuggestions(text.lastWord());
+    string word = text.lastWord();
+    currentSuggestions = dictionary.getSuggestions(word);
 
     return currentSuggestions;
+}
+
+void Backend::processSuggestion(int suggestionNumber){
+    if(suggestionNumber<1 || suggestionNumber>4){
+        return;
+    }
+
+    suggestionNumber--; //for indexing
+
+    if(currentSuggestions[suggestionNumber] == "0"){
+        return;//invalid suggestion
+    }
+    
+    if(currentSuggestions){
+        text.updateLastWord(currentSuggestions[suggestionNumber]);
+        currentWord.insertWord(text.lastWord());
+    }
 }

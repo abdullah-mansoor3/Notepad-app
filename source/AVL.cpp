@@ -170,6 +170,11 @@ string* AVL::getSuggestions(string word){
         suggestions[1] = searchBySubstitution(word);
         suggestions[2] = searchByOmission(word);
         suggestions[3] = searchByReversal(word);
+
+        string w1 = suggestions[0];
+        string w2 = suggestions[1];
+        string w3 = suggestions[2];
+        string w4 = suggestions[3];
     }
 
     return suggestions;

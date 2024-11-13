@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Iheaders -Wall -std=c++11
+CXXFLAGS = -Iheaders -Wall -std=c++11 -g
 
 # Linker flags (add -lncurses to link the ncurses library)
 LDFLAGS = -lncurses
