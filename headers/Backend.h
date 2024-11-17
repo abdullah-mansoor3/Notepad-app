@@ -20,6 +20,7 @@ class Backend{
     List text;
     Stack currentWord;
     string *currentSuggestions;
+    int maxWordLength;
 
     public:
 

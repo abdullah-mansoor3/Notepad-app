@@ -8,6 +8,7 @@ using namespace std;
 Backend::Backend():
     currentSuggestions(nullptr)
     {
+        maxWordLength = 0;
         initDictionary();
     }
 
@@ -32,7 +33,7 @@ void Backend::initDictionary(){
             int start = 0;
             int end = line.length() - 1;
 
-            while(start < line.length() && (line[start] == '\t' || line[start] == '\n' || line[start] == '\r')){
+            while( (start < line.length()) && ( (line[start] == '\t') || (line[start] == '\n') || (line[start] == '\r') )  ){
                 ++start;
             }
 
@@ -41,6 +42,10 @@ void Backend::initDictionary(){
             }
 
             line = line.substr(start, end - start + 1);
+            int lineLength = line.length();
+
+            if(lineLength>maxWordLength)
+                maxWordLength = lineLength;
 
             dictionary.insertNode(line);
         }
@@ -103,6 +108,7 @@ void Backend::display(){
 void Backend::loadFromFile(){
 
     currentWord.deleteStack(); //delete the current word
+    text.deleteList(); //delete the text
 
     ifstream file("notepad.txt");
 
@@ -128,26 +134,33 @@ string* Backend::getSuggestions(){
     if(currentSuggestions != nullptr)
         delete[] currentSuggestions; //delete the previous suggestions array
     
-    // get suggestions for the current word
+    //dont get suggestions if the last letter is space 
+    if(text.lastLetter() == ' '){ 
+        return dictionary.getSuggestions("");
+    }
+
     string word = text.lastWord();
-    currentSuggestions = dictionary.getSuggestions(word);
+
+    currentSuggestions = dictionary.getSuggestions(word);// get suggestions for the current word i.e last word
 
     return currentSuggestions;
 }
 
 void Backend::processSuggestion(int suggestionNumber){
-    if(suggestionNumber<1 || suggestionNumber>4){
+    if(suggestionNumber<1 || suggestionNumber>4 || !currentSuggestions){ //index out of bound or no suggestions yet
         return;
     }
 
     suggestionNumber--; //for indexing
 
+    //no suggestion found at current index
     if(currentSuggestions[suggestionNumber] == "0"){
-        return;//invalid suggestion
+        return;
     }
-    
-    if(currentSuggestions){
-        text.updateLastWord(currentSuggestions[suggestionNumber]);
-        currentWord.insertWord(text.lastWord());
-    }
+
+    string suggestion = currentSuggestions[suggestionNumber];
+    text.updateLastWord(suggestion);
+    text.insertAtEnd(' ');
+    string lastWord = text.lastWord();
+    currentWord.insertWord(lastWord);
 }

@@ -62,15 +62,15 @@ string List::lastWord(){
     string lastWord = "";
 
     ListNode *curr = tail;
-    //move past the spaces at the end
-    while(curr && curr->letter==' '){
-        curr = curr->previous;
-    }
 
     //store the word till a space is encountered
     while(curr && curr->letter != ' '){
         lastWord = curr->letter + lastWord;
         curr = curr->previous;
+    }
+
+    if(lastWord == ""){
+        return " ";
     }
 
     return lastWord;
@@ -100,7 +100,6 @@ string List::getInStringForm(){
 }
 
 void List::insertString(string text){
-    deleteList(); //delete the existing text and then load the new text
 
     for(char c : text){
         if(c=='\n')

@@ -19,6 +19,8 @@ Stack::~Stack(){
 }
 
 void Stack::insert(char c){
+    if(c==' ') //dont add spaces in the list
+        return;
 
     StackNode *newNode = new StackNode(c);
 

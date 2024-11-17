@@ -27,11 +27,12 @@ void Frontend::display(){
     getmaxyx(stdscr, rows, cols);  //get screen size
 
     //dimensions for the notepad box
-    int box_height = rows - 3; //space for recommendations at the bottom
+    int box_height = rows - 10; //space for recommendations at the bottom
     int box_width = cols - 2;   //space for box border
-    int box_start_y = 1;
+    int box_start_y = 5;
     int box_start_x = 1;
 
+    mvprintw(0, 1, "\tnotepad.txt\n\n\tLoad: Ctrl + L\t\tSave: Ctrl + S\t\tExit: Esc\t\tChoose suggestion:1,2,3,4");
     //window for the text box
     WINDOW *textwin = newwin(box_height, box_width, box_start_y, box_start_x);
     box(textwin, 0, 0); //draw the box border
@@ -61,17 +62,14 @@ void Frontend::display(){
 
     string *suggestions = backend->getSuggestions();
 
-    string w1 = suggestions[0];
-    string w2 = suggestions[1];
-    string w3 = suggestions[2];
-    string w4 = suggestions[3];
-
     //display word suggestions at the bottom of the screen
-    int start_y = rows - 2;  //suggestions line position
+    int start_y = rows - 4;  //suggestions line position
     int start_x = 2;         
     for (int i = 0; i < NUM_OF_SUGGESTED_WORDS; i++) {
         if(suggestions[i] != "0" && suggestions[i]!="") //only print valid suggestions
-            mvprintw(start_y, start_x + (i * 15), "[%s]", suggestions[i].c_str());
+            mvprintw(start_y+i, start_x , (to_string(i+1)+".\t" + suggestions[i]).c_str());
+        else    
+            mvprintw(start_y+i, start_x , (to_string(i+1) + "\t\t\t\t\t\t\t\t\t\t").c_str());
     }
 
     //clean up the window
