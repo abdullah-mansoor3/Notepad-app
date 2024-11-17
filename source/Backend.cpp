@@ -30,8 +30,8 @@ void Backend::initDictionary(){
 
         if(!line.empty()){
             //first remove escape chaarcters
-            int start = 0;
-            int end = line.length() - 1;
+            size_t start = 0;
+            size_t end = line.length() - 1;
 
             while( (start < line.length()) && ( (line[start] == '\t') || (line[start] == '\n') || (line[start] == '\r') )  ){
                 ++start;
@@ -107,13 +107,15 @@ void Backend::display(){
 
 void Backend::loadFromFile(){
 
-    currentWord.deleteStack(); //delete the current word
-    text.deleteList(); //delete the text
 
     ifstream file("notepad.txt");
 
     if(!file) //do nothing if file doesnt exist
         return;
+
+    
+    currentWord.deleteStack(); //delete the current word
+    text.deleteList(); //delete the text
 
     string fileText = "";
 

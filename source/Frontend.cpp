@@ -32,7 +32,7 @@ void Frontend::display(){
     int box_start_y = 5;
     int box_start_x = 1;
 
-    mvprintw(0, 1, "\tnotepad.txt\n\n\tLoad: Ctrl + L\t\tSave: Ctrl + S\t\tExit: Esc\t\tChoose suggestion:1,2,3,4");
+    mvprintw(0, 1, "\tnotepad.txt\n\n\tLoad: Ctrl + L\t\tSave: Ctrl + S\t\tExit: Esc\t\tDelete Last Letter: Backspace\t\tChoose suggestion:1,2,3,4");
     //window for the text box
     WINDOW *textwin = newwin(box_height, box_width, box_start_y, box_start_x);
     box(textwin, 0, 0); //draw the box border

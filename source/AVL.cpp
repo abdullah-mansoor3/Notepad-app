@@ -170,11 +170,6 @@ string* AVL::getSuggestions(string word){
         suggestions[1] = searchBySubstitution(word);
         suggestions[2] = searchByOmission(word);
         suggestions[3] = searchByReversal(word);
-
-        string w1 = suggestions[0];
-        string w2 = suggestions[1];
-        string w3 = suggestions[2];
-        string w4 = suggestions[3];
     }
 
     return suggestions;
@@ -185,7 +180,7 @@ string AVL::searchByInsertion(string word){
     string correctedWord = word;
 
     for(char c = 'a'; c <= 'z'; c++){
-        for(int i = 0; i < (word.length()); i++){
+        for(size_t i = 0; i <= (word.length()); i++){
             correctedWord.insert(i, 1, c); // (position, num of chars, chars)
 
             if(search(correctedWord)){ //if the word is in the dictionary
@@ -204,7 +199,7 @@ string AVL::searchBySubstitution(string word){
     string correctedWord = word;
 
     for(char c = 'a'; c <= 'z'; c++){
-        for(int i = 0; i < (word.length()); i++){
+        for(size_t i = 0; i < (word.length()); i++){
             correctedWord[i] = c; //replace
 
             if(search(correctedWord)){ //if the word is in the dictionary
@@ -223,7 +218,7 @@ string AVL::searchByOmission(string word){
 
     string correctedWord = word;
 
-    for(int i = 0; i < (word.length()); i++){
+    for(size_t i = 0; i < (word.length()); i++){
         correctedWord.erase(i, 1); //remove the char at i
 
         if(search(correctedWord)){ //if the word is in the dictionary
@@ -241,7 +236,7 @@ string AVL::searchByReversal(string word){
 
     string correctedWord = word;
 
-    for (int i = 0; i < (word.length()) - 1; i++){
+    for (size_t i = 0; i < (word.length()) - 1; i++){
         
         swap(correctedWord[i], correctedWord[i + 1]);  //swap adjacent characters
         if (search(correctedWord)) {
