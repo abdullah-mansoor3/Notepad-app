@@ -8,7 +8,6 @@ using namespace std;
 Backend::Backend():
     currentSuggestions(nullptr)
     {
-        maxWordLength = 0;
         initDictionary();
     }
 
@@ -42,10 +41,6 @@ void Backend::initDictionary(){
             }
 
             line = line.substr(start, end - start + 1);
-            int lineLength = line.length();
-
-            if(lineLength>maxWordLength)
-                maxWordLength = lineLength;
 
             dictionary.insertNode(line);
         }

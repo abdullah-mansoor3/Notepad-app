@@ -103,7 +103,7 @@ bool Frontend::takeInput(){ //returns true if user wants to exit
     else if(ch>='1' && ch<='4'){ //user selected a suggestion
         backend->processSuggestion(ch - '0');
     }
-    else if(ch >= 32 && ch <= 126 || ch==' '){ //printable keys
+    else if((ch >= 32 && ch <= 126) || ch==' '){ //printable keys
         backend->insertLetter(ch);    
     }
     else if(ch == KEY_ENTER || ch == '\n'){
